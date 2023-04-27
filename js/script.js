@@ -1,16 +1,22 @@
 const computerChoice = getComputerChoice();
-const playerChoice = checkPlayerChoice(prompt("please enter your choice"));
+const input = prompt('Choose rock, paper or scissors');
+const playerChoice = checkPlayerChoice(input);
 
 function getComputerChoice(){
-   let randomNumber=Math.floor(math.random()*10+1);
-   switch (randomNumber){
-    case randomNumber<4:
+   let randomNumber=Math.floor(Math.random()*10+1);
+   console.log(randomNumber);
+   
+    if(randomNumber<4){
+        console.log('rock');
         return "ROCK";
-    case randomNumber<7:
+    }else if (randomNumber<7){
+        console.log('paper');
         return "PAPER";
-    case randomNumber<=10:
+    }else if (randomNumber<=10){       
+        console.log('sc');
         return "SCISSORS";
-   }
+    }
+   
 }
 
 function checkPlayerChoice(choice){
@@ -19,7 +25,7 @@ function checkPlayerChoice(choice){
         if (upperChoice === 'ROCK' || upperChoice === 'PAPER' || upperChoice === 'SCISSORS'){
             return upperChoice;
         }else{
-            retun "Choice is unavailable."
+            return "Choice is unavailable."
         }
     }else{
         return "Choice is unavailable.";
@@ -28,12 +34,16 @@ function checkPlayerChoice(choice){
 
 function result(){
     // check win condition
-    if ((playerChoice === 'ROCK' && computerChoice === 'SCISSORS') ||(playerChoice === 'PAPER' && computerChoice === 'ROCK') || (playerChoice === 'SCISSORS' && computerChoice === 'PAPER')){
-        return 'You win!';
-    } else if (playerChoice === computerChoice){
-        return "It's a tie!";
-    } else {
-        return 'You lost!';
+    if(playerChoice === 'Choice is unavailable.'){
+        return playerChoice;
+    }else{
+        if ((playerChoice === 'ROCK' && computerChoice === 'SCISSORS') ||(playerChoice === 'PAPER' && computerChoice === 'ROCK') || (playerChoice === 'SCISSORS' && computerChoice === 'PAPER')){
+            return `Computer chose ${computerChoice.toLowerCase()}, you win!`;
+        } else if (playerChoice === computerChoice){
+            return `Computer chose ${computerChoice.toLowerCase()}, it's a tie!`;
+        } else {
+            return `Computer chose ${computerChoice.toLowerCase()}, you lost!`;
+        }
     }
 }
 
