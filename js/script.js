@@ -1,22 +1,16 @@
-const computerChoice = getComputerChoice();
-const input = prompt('Choose rock, paper or scissors');
-const playerChoice = checkPlayerChoice(input);
-
 function getComputerChoice(){
-   let randomNumber=Math.floor(Math.random()*10+1);
-   console.log(randomNumber);
-   
+   let randomNumber=Math.floor(Math.random()*10+1);   
     if(randomNumber<4){
-        console.log('rock');
         return "ROCK";
     }else if (randomNumber<7){
-        console.log('paper');
         return "PAPER";
     }else if (randomNumber<=10){       
-        console.log('sc');
         return "SCISSORS";
-    }
-   
+    }   
+}
+
+function getPlayerChoice(){
+    return prompt('Choose rock, paper or scissors');
 }
 
 function checkPlayerChoice(choice){
@@ -32,19 +26,54 @@ function checkPlayerChoice(choice){
     }
 }
 
-function result(){
-    // check win condition
-    if(playerChoice === 'Choice is unavailable.'){
-        return playerChoice;
-    }else{
-        if ((playerChoice === 'ROCK' && computerChoice === 'SCISSORS') ||(playerChoice === 'PAPER' && computerChoice === 'ROCK') || (playerChoice === 'SCISSORS' && computerChoice === 'PAPER')){
-            return `Computer chose ${computerChoice.toLowerCase()}, you win!`;
-        } else if (playerChoice === computerChoice){
-            return `Computer chose ${computerChoice.toLowerCase()}, it's a tie!`;
-        } else {
-            return `Computer chose ${computerChoice.toLowerCase()}, you lost!`;
-        }
+function whoWins(a,b){
+    if ((a === 'ROCK' && b === 'SCISSORS') ||(a === 'PAPER' && b === 'ROCK') || (a === 'SCISSORS' && b === 'PAPER')){
+        return 'player1';
+    } else if (a === b){
+        return `tie`;
+    } else {
+        return `player2`;
     }
 }
 
-alert(result());
+function game(){   
+    let playerScore = 0;
+    let computerScore = 0;
+    let highestScore = 0; 
+    let roundsToPlay = 5;
+    while(highestScore<=((roundsToPlay-1)/2)){
+        let computerChoice = getComputerChoice();        
+        let playerChoice = checkPlayerChoice(getPlayerChoice());
+        if(playerChoice === 'Choice is unavailable.'){   
+            while (playerChoice === 'Choice is unavailable.'){
+                alert('Choice is unavailable.');
+                playerChoice = checkPlayerChoice(getPlayerChoice());
+            }
+        }
+        let winner = whoWins(playerChoice, computerChoice);
+        if (winner === 'player1'){
+            alert(`${playerChoice.toLowerCase()} vs ${computerChoice.toLowerCase()} ${"\n"}You Win!`);
+            playerScore++;
+        }else if(winner === 'player2'){
+            alert(`${playerChoice.toLowerCase()} vs ${computerChoice.toLowerCase()} ${"\n"}You Lose!`);
+            computerScore++;
+        } else {
+            alert(`${playerChoice.toLowerCase()} vs ${computerChoice.toLowerCase()} ${"\n"}It's a Tie!`);
+        }
+        if(playerScore>=computerScore){
+            highestScore=playerScore;
+        }else{
+            highestScore=computerScore;
+        }
+    }
+    if (playerScore === computerScore){
+        alert(`It's a tie! ${"\n"}You ${playerScore} vs ${computerScore} CPU`);
+    } else if (playerScore > computerScore){
+        alert(`You win! ${"\n"}You ${playerScore} vs ${computerScore} CPU`);
+    } else {
+        alert(`You lose! ${"\n"}You ${playerScore} vs ${computerScore} CPU`);
+    }
+    
+}
+game();
+
