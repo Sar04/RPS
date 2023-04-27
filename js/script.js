@@ -30,6 +30,7 @@ function whoWins(a,b){
     if ((a === 'ROCK' && b === 'SCISSORS') ||
         (a === 'PAPER' && b === 'ROCK') || 
         (a === 'SCISSORS' && b === 'PAPER')){
+
         return 'player1';
     } else if (a === b){
         return `tie`;
@@ -38,21 +39,27 @@ function whoWins(a,b){
     }
 }
 
-function game(){   
+function runGame(){   
+
     let playerScore = 0;
     let computerScore = 0;
     let highestScore = 0; 
     let roundsToPlay = 5;
+
     while(highestScore<=((roundsToPlay-1)/2)){
+
         let computerChoice = getComputerChoice();        
         let playerChoice = checkPlayerChoice(getPlayerChoice());
+
         if(playerChoice === 'Choice is unavailable.'){   
             while (playerChoice === 'Choice is unavailable.'){
                 alert('Choice is unavailable.');
                 playerChoice = checkPlayerChoice(getPlayerChoice());
             }
         }
+
         let winner = whoWins(playerChoice, computerChoice);
+
         if (winner === 'player1'){
             alert(`${playerChoice.toLowerCase()} vs ${computerChoice.toLowerCase()} ${"\n"}You Win!`);
             playerScore++;
@@ -62,6 +69,7 @@ function game(){
         } else {
             alert(`${playerChoice.toLowerCase()} vs ${computerChoice.toLowerCase()} ${"\n"}It's a Tie!`);
         }
+
         if(playerScore>=computerScore){
             highestScore=playerScore;
         }else{
@@ -77,5 +85,5 @@ function game(){
     }
     
 }
-game();
+runGame();
 
