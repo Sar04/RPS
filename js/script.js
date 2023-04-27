@@ -27,7 +27,9 @@ function checkPlayerChoice(choice){
 }
 
 function whoWins(a,b){
-    if ((a === 'ROCK' && b === 'SCISSORS') ||(a === 'PAPER' && b === 'ROCK') || (a === 'SCISSORS' && b === 'PAPER')){
+    if ((a === 'ROCK' && b === 'SCISSORS') ||
+        (a === 'PAPER' && b === 'ROCK') || 
+        (a === 'SCISSORS' && b === 'PAPER')){
         return 'player1';
     } else if (a === b){
         return `tie`;
