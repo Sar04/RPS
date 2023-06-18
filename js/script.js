@@ -45,11 +45,11 @@ function whoWins(a,b){
         (a === 'PAPER' && b === 'ROCK') || 
         (a === 'SCISSORS' && b === 'PAPER')){
 
-        return 'player1';
+        return 'you';
     } else if (a === b){
         return `tie`;
     } else {
-        return `player2`;
+        return `CPU`;
     }
 }
 
@@ -60,52 +60,52 @@ function whoWins2(a,b){
    else alert('you lost');
 }
 
-function runGame(){   
+// function runGame(){   
 
-    let playerScore = 0;
-    let computerScore = 0;
-    let highestScore = 0; 
-    let roundsToPlay = 5;
+//     let playerScore = 0;
+//     let computerScore = 0;
+//     let highestScore = 0; 
+//     let roundsToPlay = 5;
 
-    while(highestScore<=((roundsToPlay-1)/2)){
+//     while(highestScore<=((roundsToPlay-1)/2)){
 
-        let computerChoice = getComputerChoice();        
-        let playerChoice = checkPlayerChoice(getPlayerChoice());
+//         let computerChoice = getComputerChoice();        
+//         let playerChoice = checkPlayerChoice(getPlayerChoice());
 
-        if(playerChoice === 'Choice is unavailable.'){   
-            while (playerChoice === 'Choice is unavailable.'){
-                alert('Choice is unavailable.');
-                playerChoice = checkPlayerChoice(getPlayerChoice());
-            }
-        }
+//         if(playerChoice === 'Choice is unavailable.'){   
+//             while (playerChoice === 'Choice is unavailable.'){
+//                 alert('Choice is unavailable.');
+//                 playerChoice = checkPlayerChoice(getPlayerChoice());
+//             }
+//         }
 
-        let winner = whoWins(playerChoice, computerChoice);
+//         let winner = whoWins(playerChoice, computerChoice);
 
-        if (winner === 'player1'){
-            alert(`${playerChoice.toLowerCase()} vs ${computerChoice.toLowerCase()} ${"\n"}You Win!`);
-            playerScore++;
-        }else if(winner === 'player2'){
-            alert(`${playerChoice.toLowerCase()} vs ${computerChoice.toLowerCase()} ${"\n"}You Lose!`);
-            computerScore++;
-        } else {
-            alert(`${playerChoice.toLowerCase()} vs ${computerChoice.toLowerCase()} ${"\n"}It's a Tie!`);
-        }
+//         if (winner === 'player1'){
+//             alert(`${playerChoice.toLowerCase()} vs ${computerChoice.toLowerCase()} ${"\n"}You Win!`);
+//             playerScore++;
+//         }else if(winner === 'player2'){
+//             alert(`${playerChoice.toLowerCase()} vs ${computerChoice.toLowerCase()} ${"\n"}You Lose!`);
+//             computerScore++;
+//         } else {
+//             alert(`${playerChoice.toLowerCase()} vs ${computerChoice.toLowerCase()} ${"\n"}It's a Tie!`);
+//         }
 
-        if(playerScore>=computerScore){
-            highestScore=playerScore;
-        }else{
-            highestScore=computerScore;
-        }
-    }
-    if (playerScore === computerScore){
-        alert(`It's a tie! ${"\n"}You ${playerScore} vs ${computerScore} CPU`);
-    } else if (playerScore > computerScore){
-        alert(`You win! ${"\n"}You ${playerScore} vs ${computerScore} CPU`);
-    } else {
-        alert(`You lose! ${"\n"}You ${playerScore} vs ${computerScore} CPU`);
-    }
+//         if(playerScore>=computerScore){
+//             highestScore=playerScore;
+//         }else{
+//             highestScore=computerScore;
+//         }
+//     }
+//     if (playerScore === computerScore){
+//         alert(`It's a tie! ${"\n"}You ${playerScore} vs ${computerScore} CPU`);
+//     } else if (playerScore > computerScore){
+//         alert(`You win! ${"\n"}You ${playerScore} vs ${computerScore} CPU`);
+//     } else {
+//         alert(`You lose! ${"\n"}You ${playerScore} vs ${computerScore} CPU`);
+//     }
     
-}
+// }
 // runGame();
 
 let playerChoice2 = 0;
@@ -113,29 +113,62 @@ const ROCK = document.querySelector('#rock');
 const PAPER = document.querySelector('#paper');
 const SCISSORS = document.querySelector('#scissors');
 const DISPLAY = document.querySelector('#display');
+let playerScore = 0;
+let cpuScore = 0;
+let winCondition = 3;
+
 
 function playRound(){
-    console.log('play');
-    const computerChoice2 = getComputerChoice2();
-    whoWins2(playerChoice2,computerChoice2);
+    while(DISPLAY.firstChild){
+        DISPLAY.lastChild.remove();
+    }
+    const computerChoice2 = getComputerChoice();
+    const winner = whoWins(playerChoice2,computerChoice2);
     let paragraph = document.createElement('p');
-    paragraph.textContent = `you chose ${playerChoice2} vs ${computerChoice2}`;
+    let scoreParagraph = document.createElement('p');
+    let endParagraph = document.createElement('p');
+    //prepare display Results
+    paragraph.textContent = `you chose ${playerChoice2}, CPU chose ${computerChoice2}`;
+    if (winner ==='tie'){
+        paragraph.textContent += ", it's a tie!";
+    }else{
+        paragraph.textContent += `, ${winner} won the round!`;
+    }
+
+    //prepare display Score
+    if (winner === 'you'){
+        playerScore++;
+    }else if(winner === 'CPU'){
+        cpuScore++;
+    }
+    scoreParagraph.textContent = `Score: YOU ${playerScore} vs ${cpuScore} CPU`;
+
+    //Display Results and Score
     DISPLAY.appendChild(paragraph);
-    if (DISPLAY.childElementCount > 1){
-        DISPLAY.removeChild(DISPLAY.firstChild);
+    DISPLAY.appendChild(scoreParagraph);
+
+    //Game end Check and Execution
+    if(playerScore == winCondition || cpuScore == winCondition){
+        let gameWinner = (playerScore>cpuScore) ? 'You' : 'CPU';
+        endParagraph.textContent = `${gameWinner} won the game!`
+        DISPLAY.appendChild(endParagraph)
+        playerScore = 0;
+        cpuScore = 0;
     }
 }
 
 ROCK.addEventListener('click', ()=>
 {
-    playerChoice2 = 1;
+    playerChoice2 = 'ROCK';
     playRound();
 });
 PAPER.addEventListener('click', ()=>{
-    playerChoice2 = 2;
+    playerChoice2 = 'PAPER';
+    playRound();
 });
 SCISSORS.addEventListener('click', ()=> {
-    playerChoice2 = 3;
+    playerChoice2 = 'SCISSORS';
+    playRound();
 });
 
 // ROCK.addEventListener('click', ()=> console.log('1'));
