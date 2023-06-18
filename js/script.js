@@ -9,6 +9,20 @@ function getComputerChoice(){
     }   
 }
 
+function getComputerChoice2(){
+    let randomNumber=Math.floor(Math.random()*10+1);   
+     if(randomNumber<4){
+         console.log('1');
+         return 1;
+     }else if (randomNumber<7){
+        console.log('2');
+         return 2;
+     }else if (randomNumber<=10){  
+        console.log('3');     
+         return 3;
+     }   
+ }
+
 function getPlayerChoice(){
     return prompt('Choose rock, paper or scissors');
 }
@@ -37,6 +51,13 @@ function whoWins(a,b){
     } else {
         return `player2`;
     }
+}
+
+function whoWins2(a,b){
+   if(a==b) alert('tie');
+   else if(a!=1 && a>b) alert('you won');
+   else if(a == 1 && b == 3) alert ('you won');
+   else alert('you lost');
 }
 
 function runGame(){   
@@ -85,5 +106,40 @@ function runGame(){
     }
     
 }
-runGame();
+// runGame();
+
+let playerChoice2 = 0;
+const ROCK = document.querySelector('#rock');
+const PAPER = document.querySelector('#paper');
+const SCISSORS = document.querySelector('#scissors');
+const DISPLAY = document.querySelector('#display');
+
+function playRound(){
+    console.log('play');
+    const computerChoice2 = getComputerChoice2();
+    whoWins2(playerChoice2,computerChoice2);
+    let paragraph = document.createElement('p');
+    paragraph.textContent = `you chose ${playerChoice2} vs ${computerChoice2}`;
+    DISPLAY.appendChild(paragraph);
+    if (DISPLAY.childElementCount > 1){
+        DISPLAY.removeChild(DISPLAY.firstChild);
+    }
+}
+
+ROCK.addEventListener('click', ()=>
+{
+    playerChoice2 = 1;
+    playRound();
+});
+PAPER.addEventListener('click', ()=>{
+    playerChoice2 = 2;
+});
+SCISSORS.addEventListener('click', ()=> {
+    playerChoice2 = 3;
+});
+
+// ROCK.addEventListener('click', ()=> console.log('1'));
+// PAPER.addEventListener('click', ()=> console.log('2'));
+// SCISSORS.addEventListener('click', ()=> console.log('3'));
+
 
