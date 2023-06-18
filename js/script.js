@@ -115,7 +115,7 @@ const SCISSORS = document.querySelector('#scissors');
 const DISPLAY = document.querySelector('#display');
 let playerScore = 0;
 let cpuScore = 0;
-let winCondition = 3;
+let winCondition = 5;
 
 
 function playRound(){
