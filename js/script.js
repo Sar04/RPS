@@ -113,9 +113,26 @@ const ROCK = document.querySelector('#rock');
 const PAPER = document.querySelector('#paper');
 const SCISSORS = document.querySelector('#scissors');
 const DISPLAY = document.querySelector('#display');
+const OKBUTTON = document.querySelector('#ok');
+const POPUP = document.querySelector('#popup');
+const WHITEBG = document.querySelector("#white");
+const PLAYERIMG = document.querySelector("#playerChoice");
+const CPUIMG = document.querySelector("#cpuChoice");
+const RESULTTEXT = document.querySelector('#resultText')
+const CHOICES = document.querySelector('.buttons').querySelectorAll('img');
+const PLAYERSCOREDISPLAY = document.querySelector('#playerScore');
+const CPUSCOREDISPLAY = document.querySelector('#cpuScore');
 let playerScore = 0;
 let cpuScore = 0;
-let winCondition = 5;
+let winCondition = 3;
+
+function resultPopup(){    
+    WHITEBG.style.opacity = "50%";
+    WHITEBG.style.width = "100%";
+    POPUP.style.opacity = "100%";
+    POPUP.style.width = '20%';
+    OKBUTTON.style.cssText = "pointer-events: auto";
+}
 
 
 function playRound(){
@@ -130,9 +147,15 @@ function playRound(){
     //prepare display Results
     paragraph.textContent = `you chose ${playerChoice2}, CPU chose ${computerChoice2}`;
     if (winner ==='tie'){
-        paragraph.textContent += ", it's a tie!";
+        RESULTTEXT.textContent = "TIE!";
+        // paragraph.textContent += ", it's a tie!";
+    // }else{
+    //     paragraph.textContent += `, ${winner} won the round!`;
+    // }
+    }else if(winner === 'you'){
+        RESULTTEXT.textContent = "WIN!";
     }else{
-        paragraph.textContent += `, ${winner} won the round!`;
+        RESULTTEXT.textContent = "LOSE!";
     }
 
     //prepare display Score
@@ -141,11 +164,13 @@ function playRound(){
     }else if(winner === 'CPU'){
         cpuScore++;
     }
-    scoreParagraph.textContent = `Score: YOU ${playerScore} vs ${cpuScore} CPU`;
+    PLAYERSCOREDISPLAY.textContent = `${playerScore}`;
+    CPUSCOREDISPLAY.textContent = `${cpuScore}`;
+   // scoreParagraph.textContent = `Score: YOU ${playerScore} vs ${cpuScore} CPU`;
 
     //Display Results and Score
-    DISPLAY.appendChild(paragraph);
-    DISPLAY.appendChild(scoreParagraph);
+    // DISPLAY.appendChild(paragraph);
+    // DISPLAY.appendChild(scoreParagraph);
 
     //Game end Check and Execution
     if(playerScore == winCondition || cpuScore == winCondition){
@@ -155,20 +180,58 @@ function playRound(){
         playerScore = 0;
         cpuScore = 0;
     }
+    switch(computerChoice2){
+        case "PAPER":
+            CPUIMG.src = "images/paper.png";
+            break;
+        case "ROCK":
+            CPUIMG.src="images/rock.png";
+            break;
+        case "SCISSORS":
+            CPUIMG.src="images/scissors.png";
+            break;
+    }
+    resultPopup();
 }
+
+Array.from(CHOICES).forEach((choice)=>{
+    console.log(choice);
+    choice.addEventListener('mouseenter', ()=>{
+        choice.classList.add('enlarge');
+    });
+    choice.addEventListener('mouseleave', ()=>{
+        choice.classList.remove('enlarge');
+    });
+});
 
 ROCK.addEventListener('click', ()=>
 {
     playerChoice2 = 'ROCK';
+    PLAYERIMG.src="images/rock.png";
     playRound();
 });
+// ROCK.addEventListener('mouseenter',()=>{
+//     ROCK.classList.add("enlarge");
+// })
+// ROCK.addEventListener('mouseout',()=>{
+//     ROCK.classList.remove("enlarge");
+// })
 PAPER.addEventListener('click', ()=>{
     playerChoice2 = 'PAPER';
+    PLAYERIMG.src="images/paper.png";
     playRound();
 });
 SCISSORS.addEventListener('click', ()=> {
     playerChoice2 = 'SCISSORS';
+    PLAYERIMG.src="images/scissors.png";
     playRound();
+});
+OKBUTTON.addEventListener('click', ()=>{
+    POPUP.style.opacity = '0%';
+    POPUP.style.width = '0%';
+    OKBUTTON.style.cssText = "pointer-events: none";
+    WHITEBG.style.opacity = "0%";
+    WHITEBG.style.width = "0%";
 });
 
 // ROCK.addEventListener('click', ()=> console.log('1'));

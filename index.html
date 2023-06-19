@@ -3,13 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <title>RPS</title>
+    <link rel="stylesheet" href="styles/hkStyle.css">
     <script src="js/script.js" defer></script>
 </head>
 <body>
-    <button id="rock">Rock</button>
-    <button id="paper">Paper</button>
-    <button id="scissors">Scissors</button>
-    <div id="display"></div>
+    <div class="container">
+        <img src="images/HK.jpg" class="hkBig">
+        <div class="buttons">
+            <img src="images/rock.png" id="rock">
+            <img src="images/scissors.png" id="scissors">
+            <img src="images/paper.png" id="paper">
+            <!-- <button id="rock">Rock</button>
+            <button id="paper">Paper</button>
+            <button id="scissors">Scissors</button> -->
+        </div>
+        <div class="scoreBoard">
+            <h1 id="playerScore">0</h1>
+            <h1>VS</h1>
+            <h1 id="cpuScore">0</h1>
+        </div>
+        <div id="display"></div>
+        <div id="white"></div>
+        <div id="popup">
+            <div class="choices">
+                <img src="images/paper.png" id="playerChoice">
+                <h1>VS</h1>
+                <img src="images/paper.png" id="cpuChoice">
+            </div>
+            <h1 id="resultText"></h1>
+            <button id="ok">OK</button>
+        </div>
+    </div>
 
 </body>
 </html>
