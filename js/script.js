@@ -131,6 +131,7 @@ function resultPopup(){
     WHITEBG.style.width = "100%";
     POPUP.style.opacity = "100%";
     POPUP.style.width = '20%';
+    POPUP.style.height = '30%';
     OKBUTTON.style.cssText = "pointer-events: auto";
 }
 
@@ -194,15 +195,15 @@ function playRound(){
     resultPopup();
 }
 
-Array.from(CHOICES).forEach((choice)=>{
-    console.log(choice);
-    choice.addEventListener('mouseenter', ()=>{
-        choice.classList.add('enlarge');
-    });
-    choice.addEventListener('mouseleave', ()=>{
-        choice.classList.remove('enlarge');
-    });
-});
+// Array.from(CHOICES).forEach((choice)=>{
+//     console.log(choice);
+//     choice.addEventListener('mouseenter', ()=>{
+//         choice.classList.add('enlarge');
+//     });
+//     choice.addEventListener('mouseleave', ()=>{
+//         choice.classList.remove('enlarge');
+//     });
+// });
 
 ROCK.addEventListener('click', ()=>
 {
@@ -229,6 +230,7 @@ SCISSORS.addEventListener('click', ()=> {
 OKBUTTON.addEventListener('click', ()=>{
     POPUP.style.opacity = '0%';
     POPUP.style.width = '0%';
+    POPUP.style.height = '0%'
     OKBUTTON.style.cssText = "pointer-events: none";
     WHITEBG.style.opacity = "0%";
     WHITEBG.style.width = "0%";

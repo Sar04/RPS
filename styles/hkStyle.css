@@ -24,6 +24,10 @@ body{
     gap: 20px;
     
 }
+
+#rock:hover, #paper:hover, #scissors:hover{
+   scale:110%;
+}
 .enlarge{
     scale: 110%;
 }
@@ -55,8 +59,6 @@ body{
     border-color: white;
     border-width: 4px;
     border-style: solid;
-    width: 20%;
-    height: 33%;
     background-color: rgb(239, 167, 187);
     position: absolute;
     top: 33%;
