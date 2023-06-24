@@ -131,7 +131,7 @@ function resultPopup(){
     WHITEBG.style.width = "100%";
     POPUP.style.opacity = "100%";
     POPUP.style.width = '20%';
-    POPUP.style.height = '30%';
+    POPUP.style.height = '33%';
     OKBUTTON.style.cssText = "pointer-events: auto";
 }
 
